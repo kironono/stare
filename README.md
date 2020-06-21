@@ -18,7 +18,7 @@ When waiting for the termination of multiple processes:
 
 ## License
 
-`stare` is distributed under the terms of both the MIT license.
+`stare` is distributed under the terms of the MIT license.
 
 See the [LICENSE](LICENSE) files in this repository for more information.
 

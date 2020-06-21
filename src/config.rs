@@ -1,22 +1,21 @@
 use std::env;
 use std::process::exit;
 
-use getopts::{Options};
+use getopts::Options;
 use sysinfo::Pid;
 
 #[derive(Debug)]
 pub struct Config {
-    pub pid_list: Vec<Pid>
+    pub pid_list: Vec<Pid>,
 }
 
 impl Default for Config {
     fn default() -> Config {
         Config {
-            pid_list: Vec::new()
+            pid_list: Vec::new(),
         }
     }
 }
-
 
 fn print_usage(program: &str, opts: &Options) {
     let brief = format!("Usage: {} PID", program);
