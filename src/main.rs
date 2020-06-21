@@ -6,14 +6,15 @@ use sysinfo::{System, SystemExt};
 
 fn main() {
     let config = config::parse_args();
+    let check_interval = time::Duration::from_secs(1);
     let mut threads = vec![];
 
     for &pid in config.pid_list.iter() {
         threads.push(
             thread::spawn(move || {
-                let system = System::new_all();
-                let sleep_duration = time::Duration::from_secs(1);
+                let mut system = System::new_all();
                 loop {
+                    system.refresh_processes();
                     match system.get_process(pid) {
                         None => {
                             break;
@@ -21,7 +22,7 @@ fn main() {
                         Some(_p) => {
                         }
                     }
-                    thread::sleep(sleep_duration);
+                    thread::sleep(check_interval);
                 }
             })
         );
