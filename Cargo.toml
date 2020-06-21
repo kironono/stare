@@ -1,8 +1,12 @@
 [package]
 name = "stare"
 description = "A command line application that waits for the end of the process."
+readme = "README.md"
+categories = ["command-line-utilities"]
 version = "0.1.0"
 authors = ["Junichi Kakisako <kilo.sw@gmail.com>"]
+homepage = "https://github.com/kironono/stare"
+repository = "https://github.com/kironono/stare"
 license = "MIT"
 edition = "2018"
 
