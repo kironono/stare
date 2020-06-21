@@ -1,7 +1,9 @@
 [package]
 name = "stare"
+description = "A command line application that waits for the end of the process."
 version = "0.1.0"
 authors = ["Junichi Kakisako <kilo.sw@gmail.com>"]
+license = "MIT"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
