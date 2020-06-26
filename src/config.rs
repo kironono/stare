@@ -14,7 +14,7 @@ impl Default for Config {
     fn default() -> Config {
         Config {
             pid_list: Vec::new(),
-            interval: 1
+            interval: 1,
         }
     }
 }
@@ -58,11 +58,7 @@ pub fn parse_args() -> Config {
 
     if let Some(v) = matches.opt_str("interval") {
         if let Ok(n) = v.parse::<u64>() {
-            conf.interval = if n < 1 {
-                1
-            } else {
-                n
-            };
+            conf.interval = if n < 1 { 1 } else { n };
         }
     }
 
