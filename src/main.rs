@@ -6,7 +6,7 @@ use sysinfo::{System, SystemExt};
 
 fn main() {
     let config = config::parse_args();
-    let check_interval = time::Duration::from_secs(1);
+    let check_interval = time::Duration::from_secs(config.interval);
     let mut threads = vec![];
 
     for &pid in config.pid_list.iter() {

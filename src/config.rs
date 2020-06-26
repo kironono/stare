@@ -7,12 +7,14 @@ use sysinfo::Pid;
 #[derive(Debug)]
 pub struct Config {
     pub pid_list: Vec<Pid>,
+    pub interval: u64,
 }
 
 impl Default for Config {
     fn default() -> Config {
         Config {
             pid_list: Vec::new(),
+            interval: 1
         }
     }
 }
@@ -29,8 +31,9 @@ pub fn parse_args() -> Config {
 
     let mut opts = Options::new();
 
-    opts.optflag("h", "help", "Show this help");
-    opts.optflag("v", "version", "Print application version");
+    opts.optopt("n", "interval", "Seconds to wait between updates", "SEC");
+    opts.optflag("h", "help", "Display this help and exit");
+    opts.optflag("v", "version", "Output version information and exit");
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => m,
@@ -42,14 +45,25 @@ pub fn parse_args() -> Config {
     };
 
     if matches.opt_present("version") {
+        let name = env!("CARGO_PKG_NAME");
         let version = env!("CARGO_PKG_VERSION");
-        println!("{}", version);
+        println!("{} version {}", name, version);
         exit(0);
     }
 
     if matches.opt_present("help") || matches.free.is_empty() {
         print_usage(&program, &opts);
         exit(0);
+    }
+
+    if let Some(v) = matches.opt_str("interval") {
+        if let Ok(n) = v.parse::<u64>() {
+            conf.interval = if n < 1 {
+                1
+            } else {
+                n
+            };
+        }
     }
 
     let pids = &matches.free[0];
